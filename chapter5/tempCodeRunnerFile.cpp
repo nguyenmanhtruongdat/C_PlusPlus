@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include<cstring>
 #include<string.h>
 using namespace std;
 
@@ -13,7 +12,7 @@ char* delete_space(char *str,char *result) {
 
       if (chr == '\r' || chr == '\n' || chr == ' ') {
         continue;
-      }
+      } 
       result[pos++] = chr;
   }
   return result;

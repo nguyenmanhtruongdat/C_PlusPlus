@@ -1,16 +1,16 @@
 #include<iostream>
 using namespace std;
-int main(){
-
-    int i, n, sum=0;
-    cout<<"Enter n: ";
-    cin>>n;
-
-    for ( i = 1; i <= n; i++)
+int main()
+{
+    int a, b;
+    cin>>a>>b;
+    if (a>0 && a<1000000 && b>0 && b<1000000)
     {
-        sum+=i;
-    }
-    cout<<"The sum from 1 to "<<n<<" = "<<sum;
+        cout<<a+b;
 
-    return 0; 
+    }else{
+        cout<<"N";
+    }
+    
+    return 0;
 }

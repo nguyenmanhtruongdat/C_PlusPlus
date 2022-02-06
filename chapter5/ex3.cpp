@@ -1,25 +1,34 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-#include<math.h>
-int main(){
 
-    int a, n, power=1, i=1;
-    
-    cout<<"Enter number: ";
-    cin>>a;
-    cout<<"Enter exponent: ";
-    cin>>n;
-
-    do
+int findNumber(int N)
+{
+    int S = 0;
+    int i = 0;
+    while (S + (i + 1) < N)
     {
-        power=power*a;
         i++;
+        S = S + i;
+    }
+    return i;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    if (n>0)
+    {
+
+        int result = findNumber(n);
+        cout << result;
+
+    }else{
         
-    }while (i<=n);
+        cout<<"N";
+    }
     
-    cout<<a<<" power of "<<n<<" is "<<power;
-    
+
     return 0;
-
-
 }
