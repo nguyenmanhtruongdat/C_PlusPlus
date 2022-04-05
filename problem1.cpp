@@ -1,9 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <iostream>
 using namespace std;
-ofstream os("StudenList.txt", ios::binary);
+//ofstream os("StudenList.txt", ios::binary);
 struct Student
 {
     char name[30];
@@ -32,7 +31,7 @@ Student *add()
     Student *std = new Student;
     cout << "Enter name:";
     gets(std->name);
-    cout << "Enter date of birth:";
+    cout << "Enter date of birth(dd-MM-YYYY)):";
     cin >> std->day >> std->month >> std->year;
     cout << "Enter math marks:";
     cin >> std->mathMarks;
@@ -87,11 +86,12 @@ void print(StudentList *list)
     while (tmpNode != NULL)
     {
         Student *std = tmpNode->data;
-        cout << std->name << "\n";
-        cout << std->day << "/" << std->month << "/" << std->year << endl;
-        cout << std->mathMarks << "\n";
-        cout << std->physicsMarks << "\n";
-        cout << std->languageMarks << "\n";
+cout <<"Name: " << std->name << "\n";
+        cout <<"Date of birth: "<< std->day << "/" << std->month << "/" << std->year << endl;
+        cout <<"Math: " << std->mathMarks << "\n";
+        cout <<"Physics: "<< std->physicsMarks << "\n";
+        cout <<"Language: "<< std->languageMarks << "\n";
+
 
         tmpNode = tmpNode->next;
     }
@@ -100,29 +100,117 @@ void check(string name)
 {
     Node *tmp;
 }
-void DeleteStudent(string name, StudentList &list)
+void DeleteStudent(string name, StudentList *list)
 {
 
-    for (Node *i = list.pHead; i != NULL; i = i->next)
+   
+}
+int countStudent(StudentList *list){
+	int count =0;
+	Node *tmpNode = list->pHead;
+	Student *std = tmpNode->data;
+//	for(Node *i =list->pHead;i!=NULL; i=i->next)
+//	{
+//		if(std->year>0)
+//		{
+//				count++;
+//		}
+//	}
+if (tmpNode == NULL)
     {
+        cout << "Danh sach rong";
+        return 1;
     }
+    while (tmpNode != NULL)
+    {
+		if(std->year>0){
+			count++;
+			tmpNode=tmpNode->next;
+		}
+	}
+		return count;
 }
 void writeFile(StudentList *list, Student *n)
 {
-    Node *tmp = new Node;
-    tmp->data = n;
-    tmp->next = tmp;
-    os.write(reinterpret_cast<char *>(tmp), sizeof(tmp));
+//    Node *tmp = new Node;
+//    tmp->data = n;
+//    tmp->next = tmp;
+//    os.write(reinterpret_cast<char *>(tmp), sizeof(tmp));
 }
-int main()
+void less5(StudentList *list)
 {
+    Node *tmpNode = list->pHead;
+    if (tmpNode == NULL)
+    {
+        cout << "Danh sach rong";
+        return;
+    }
+    cout<<"Student have the math marks less than 5: \n";
+    while (tmpNode != NULL)
+    {
+        Student *std = tmpNode->data;
+        if(std->mathMarks <5 ){
+        
+        cout<<"Name:";
+        cout << std->name << "\n";
+        cout<<"Date of birth: ";
+        cout << std->day << "/" << std->month << "/" << std->year << endl;
+        cout<<"Math Marks: ";
+		cout << std->mathMarks << "\n";
+		cout<<"Physics Marks: ";
+        cout << std->physicsMarks << "\n";
+        cout<<"Languague Marks: ";
+        cout << std->languageMarks << "\n";
+		}
+        
+        tmpNode = tmpNode->next;
+    }
+}
+void bestAvg(StudentList *list)
+{
+	float max;
+	float avg;
+    Node *tmpNode = list->pHead;
+	Student *std = tmpNode->data;
+	Student *tmpStd=tmpNode->data;
+    if (tmpNode == NULL)
+    {
+        cout << "Danh sach rong";
+        return;
+    }
+    max=((std->mathMarks)+(std->physicsMarks)+(std->languageMarks))/3;
+    while (tmpNode != NULL)
+    {
+        
+        avg=((std->mathMarks)+(std->physicsMarks)+(std->languageMarks))/3;
+        if(avg>max)
+        {
+        max=avg;
+ 		tmpStd =std;	
+		}
+		
+        tmpNode = tmpNode->next;
+    }
+    cout<<tmpStd->name;
+}
+
+int main()
+{	//a,b,c,h;
     StudentList *list;
     Initialize(list);
     Student *dat = add();
     insert(list, dat);
     Student *phung = add();
     insert(list, phung);
+	Student *hung = add();
+    insert(list, hung);
     Student *newStudent;
     cout << endl;
     print(list);
+    //countStudent(list);
+    //PrintMathLessThan5(list);
+    less5(list);
+    cout<<"Best avg:";
+    bestAvg(list);
+    
 }
